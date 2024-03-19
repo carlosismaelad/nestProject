@@ -29,11 +29,14 @@ export class ProductsService {
 
     create(createProductDto: any){
         this.products.push(createProductDto)
+        return createProductDto
     }
 
     update(id: string, updateProductDto: any){
-        const indexProduct = this.products.findIndex(product => product.id === +id)
-        this.products[indexProduct] = updateProductDto
+        const indexProduct = this.products.findIndex(
+            (product : Product) => product.id === +id)
+
+        this.products[indexProduct] = {...this.products[indexProduct] , ...updateProductDto}
     }
 
     remove(id: string){
